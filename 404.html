@@ -4,18 +4,33 @@
   <meta charset="UTF-8">
   <title>Přesměrování...</title>
   <script>
-    const path = window.location.pathname.toLowerCase();
-    
-    // Pokud cesta začíná na /geomat (jakkoliv napsané)
-    if (path === '/geomat' || path.startsWith('/geomat/')) {
-      // Zachová i případné další části cesty, parametry (?...) a kotvy (#...)
-      const rest = window.location.pathname.slice('/geomat'.length);
-      const target = 'https://realhonza.github.io/GeoMAT' + (rest || '/') + window.location.search + window.location.hash;
-      window.location.replace(target);
+    // Slovník: 'název malými písmeny': 'PřesnýNázevRepozitáře'
+    const routes = {
+      'geomat': 'GeoMAT',
+      'mapa_fotek': 'Mapa_Fotek'
+      // 'zss': 'ZSS'
+    };
+
+    const pathname = window.location.pathname;
+    // Rozdělí cestu na první segment (název projektu) a zbytek cesty
+    const match = pathname.match(/^\/([^\/]+)(\/.*)?$/);
+
+    if (match) {
+      const repoLower = match[1].toLowerCase();
+      const rest = match[2] || '/';
+
+      if (routes[repoLower]) {
+        const target = 'https://realhonza.github.io/' + routes[repoLower] + rest + window.location.search + window.location.hash;
+        window.location.replace(target);
+      }
     }
   </script>
 </head>
 <body>
-  <p>Stránka nenalezena (404). Pokud hledáš aplikaci GeoMAT, <a href="https://realhonza.github.io/GeoMAT/">klikni zde</a>.</p>
+  <p>Stránka nenalezena (404).</p>
+  <ul>
+    <li><a href="https://realhonza.github.io/GeoMAT/">Otevřít GeoMAT</a></li>
+    <li><a href="https://realhonza.github.io/Mapa_Fotek/">Otevřít Mapa_Fotek</a></li>
+  </ul>
 </body>
 </html>
