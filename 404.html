@@ -4,15 +4,12 @@
   <meta charset="UTF-8">
   <title>Přesměrování...</title>
   <script>
-    // Slovník: 'název malými písmeny': 'PřesnýNázevRepozitáře'
     const routes = {
       'geomat': 'GeoMAT',
       'mapa_fotek': 'Mapa_Fotek'
-      // 'zss': 'ZSS'
     };
 
     const pathname = window.location.pathname;
-    // Rozdělí cestu na první segment (název projektu) a zbytek cesty
     const match = pathname.match(/^\/([^\/]+)(\/.*)?$/);
 
     if (match) {
